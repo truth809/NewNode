@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 5000
 
+const config = require('./config/key');
+
 // 유저 가져오기
 const { User } = require('./models/User');
 const bodyParser = require('body-parser');
@@ -11,14 +13,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://truth809:123123qq@cluster0.oxuxg.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+mongoose.connect(config.mongoURI, 'mongodb+srv://truth809:123123qq@cluster0.oxuxg.mongodb.net/<dbname>?retryWrites=true&w=majority', {
   //이걸 써야 에러가 안생김  
 	useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }).then(() => console.log('mongoDB connect success...'))
 .catch(err => console.log('errrrrrrrrrrr',err))
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('새해 복 많이 받으세요!')
 })
 
 app.post('/register', (req, res) => {
