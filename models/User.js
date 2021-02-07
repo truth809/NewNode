@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const e = require('express');
 const saltRounds = 10;
 
 const userSchema = mongoose.Schema({
@@ -47,6 +48,8 @@ userSchema.pre('save', function(next) {
             next()
         })
     })
+    } else {
+        next()
     }
 })
 
