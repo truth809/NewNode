@@ -59,9 +59,9 @@ app.post('login', (req, res) => {
         return res.json({ loginSuccess: false, message: "비밀번호가 틀렸습니다. "})
 
         // 비밀번호 까지 맞다면 토큰을 생성하기.
-        user.generateToken(err, user) => {
+        user.generateToken((err, user) => {
             
-        }
+        })
 
     })
     
