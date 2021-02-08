@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 5000
 const cookieParser = require('cookie-parser');
+const { auth } = require('./middleware/auth');
 
 const config = require('./config/key');
 
@@ -41,9 +42,7 @@ app.post('/api/users/register', (req, res) => {
     })
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+
 
 app.post('/api/users/login', (req, res) => {
     // 요청된 이메일을 데이터베이스에서 있는지 찾는다.
@@ -72,3 +71,33 @@ app.post('/api/users/login', (req, res) => {
     })
     })
 })
+
+
+// role 1 어드민    role 2 특정 부서 어드민
+// role 0 -> 일반유저   role 0이 아니면 관리자자
+app.get('/api/users/auth',auth ,(req, res) => {
+    // 여기까지 미들웨어를 통과해 왔다는 얘기는 Authentiction 이 true 라는 말.
+    res.status(200).json({
+        _id: req.user._id,
+        isAdmin: req.user.role === 0 ? false : true,
+        isAuth: true,
+        email: req.user.email,
+        name: req.user.name,
+        lastname: req.user.lastname,
+        role: req.user.role,
+        image: req.user.image
+    })
+})
+
+
+
+
+
+
+
+
+
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+  })
