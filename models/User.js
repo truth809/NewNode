@@ -97,7 +97,7 @@ userSchema.statics.findByToken = function(token, cb) {
 }
 
 userSchema.statics.findByToken = function(token, cb) {
-    var = user = this;
+    var user = this;
 
     // 토큰을 decode 한다.
     jwt.verify(token, 'secretToken', function(err, decoded) {
