@@ -22,6 +22,10 @@ mongoose.connect(config.mongoURI, {
 }).then(() => console.log('mongoDB connect success...'))
 .catch(err => console.log(err))
 
+app.get('/api/hello', (req, res) => {
+    res.send("안녕하세요.")
+})
+
 app.get('/', (req, res) => {
   res.send('새해 복 많이 받으세요!')
 })
